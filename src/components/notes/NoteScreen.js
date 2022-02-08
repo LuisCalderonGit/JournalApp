@@ -20,4 +20,4 @@ export const NoteScreen = () => {
             </div>
         </div>
     </div>;
-};
+}; 
