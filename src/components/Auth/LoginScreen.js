@@ -1,7 +1,7 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
+import validator from "validator";
 import { startGoogleLogin, startLoginEmailPassword } from "../../actions/auth";
 import { useForm } from "../../hooks/useForm";
 
@@ -10,27 +10,48 @@ export const LoginScreen = () => {
 
   const dispatch = useDispatch();
 
+  const { loading } = useSelector(state => state.ui)
+  console.log(loading);
   const [formValues, handleInputChange] = useForm({
     email: 'luis@gmail.com',
-    password: '12345',
+    password: '123456',
   });
 
   const { email, password } = formValues;
 
   const handleLogin = (e) => {
     e.preventDefault();
+
+    // if (isOkFormLogin) {
     dispatch(startLoginEmailPassword(email, password));
+    // }
   };
 
   const handleGoogleLogin = () => {
     dispatch(startGoogleLogin());
   };
 
+
+
+  // const isOkFormLogin = () => {
+  //   if (!validator.isEmail(email)) {
+  //     console.log('Email not valid');
+  //     return false;
+  //   }
+  //   else if (password.lenght < 6) {
+  //     console.log('Password must contain more than 6 characters');
+  //     return false;
+  //   }
+
+  //   return true;
+  // }
+
   return (
     <>
       <h3 className="auth__title">Login</h3>
 
       <form onSubmit={handleLogin}>
+
         <input
           className="auth__input"
           type="text"
@@ -42,13 +63,17 @@ export const LoginScreen = () => {
         />
         <input
           className="auth__input"
-          type="text"
+          type="password"
           placeholder="password"
           name="password"
           value={password}
           onChange={handleInputChange}
         />
-        <button className="btn btn-primary btn-block" type="submit">
+        <button
+          className="btn btn-primary btn-block"
+          type="submit"
+          disabled={loading}
+        >
           Login
         </button>
 
