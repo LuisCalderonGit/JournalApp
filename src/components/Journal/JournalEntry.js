@@ -1,17 +1,21 @@
 import React from 'react';
 
-export const JournalEntry = () => {
+export const JournalEntry = ({ id, tittle, date, body, url }) => {
+    // console.log(id, tittle, date, body, url);
     return <div className='journal__entry pointer'>
-        <div className='journal__entry-picture' style={{
-            backgroundSize: 'cover',
-            background: 'url(https://static.dw.com/image/45807139_303.jpg)',
-        }}></div>
+        {
+            url &&
+            <div className='journal__entry-picture' style={{
+                backgroundSize: 'cover',
+                backgroundImage: `url()`,
+            }}></div>
+        }
 
         <div className='journal__entry-body'>
 
-            <p className='journal__entry-title'>un nuevo dia</p>
+            <p className='journal__entry-title'>{tittle}</p>
             <p className='journal__entry-content'>
-                Cillum excepteur voluptate occaecat consequat ut ea ut.
+                {body}
             </p>
         </div>
         <div className='journal__entry-date-box'>
