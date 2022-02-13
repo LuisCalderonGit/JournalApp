@@ -15,7 +15,7 @@ export const JournalEntry = ({ id, title, date, body, url }) => {
     const handleClickNote = () => {
         dispatch(activeNote(id, { title, date, body, url }));
 
-    }
+    };
 
     return <div className='journal__entry pointer' onClick={handleClickNote}>
         {
